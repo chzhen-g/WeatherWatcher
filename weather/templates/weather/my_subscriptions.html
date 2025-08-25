@@ -1,0 +1,35 @@
+{% extends "weather/base.html" %}
+{% block title %}Мои подписки{% endblock %}
+{% block content %}
+  <h2>Мои подписки</h2>
+  <p><a href="{% url 'weather:subscription_create' %}">+ Новая подписка</a></p>
+  {% if subs %}
+    <table>
+      <thead><tr><th>Город</th><th>Интервал</th><th>Условия</th><th>Статус</th><th></th></tr></thead>
+      <tbody>
+        {% for s in subs %}
+          <tr>
+            <td>{{ s.city.name }}</td>
+            <td>{{ s.get_interval_display }}</td>
+            <td>
+              {% if s.conditions %}
+                {% if s.conditions.temp_below %} ниже {{ s.conditions.temp_below }}°C; {% endif %}
+                {% if s.conditions.temp_above %} выше {{ s.conditions.temp_above }}°C; {% endif %}
+                {% if s.conditions.rain %} дождь; {% endif %}
+              {% else %}
+                (нет)
+              {% endif %}
+            </td>
+            <td>{{ s.is_active|yesno:"Активна,Выключена" }}</td>
+            <td>
+              <a href="{% url 'weather:subscription_edit' s.pk %}">Изменить</a> |
+              <a href="{% url 'weather:subscription_delete' s.pk %}">Удалить</a>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p>Подписок пока нет.</p>
+  {% endif %}
+{% endblock %}

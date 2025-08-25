@@ -1,0 +1,10 @@
+{% extends "weather/base.html" %}
+{% block title %}Удалить подписку{% endblock %}
+{% block content %}
+  <h2>Удалить подписку</h2>
+  <p>Удалить подписку на <b>{{ sub.city.name }}</b>?</p>
+  <form method="post">{% csrf_token %}
+    <button type="submit">Удалить</button>
+    <a href="{% url 'weather:my_subscriptions' %}">Отмена</a>
+  </form>
+{% endblock %}

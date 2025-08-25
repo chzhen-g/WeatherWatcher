@@ -1,0 +1,17 @@
+{% extends "weather/base.html" %}
+{% block title %}{% if mode == 'create' %}Новая подписка{% else %}Изменить подписку{% endif %}{% endblock %}
+{% block content %}
+  <h2>{% if mode == 'create' %}Новая подписка{% else %}Изменить подписку{% endif %}</h2>
+  <form method="post">{% csrf_token %}
+    <p>{{ form.city.label_tag }} {{ form.city }}</p>
+    <p>{{ form.interval.label_tag }} {{ form.interval }}</p>
+    <fieldset>
+      <legend>Условия</legend>
+      <p>{{ form.temp_below.label_tag }} {{ form.temp_below }}</p>
+      <p>{{ form.temp_above.label_tag }} {{ form.temp_above }}</p>
+      <p>{{ form.rain }} {{ form.rain.label_tag }}</p>
+    </fieldset>
+    <p><button type="submit">Сохранить</button></p>
+  </form>
+  <p><a href="{% url 'weather:my_subscriptions' %}">Назад</a></p>
+{% endblock %}

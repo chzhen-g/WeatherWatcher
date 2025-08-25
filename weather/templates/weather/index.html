@@ -1,0 +1,14 @@
+{% extends "weather/base.html" %}
+{% block title %}Города — Погода{% endblock %}
+{% block content %}
+  <h2>Города</h2>
+  {% if cities %}
+    <ul>
+      {% for c in cities %}
+        <li><a href="{% url 'weather:city_detail' c.pk %}">{{ c.name }}</a> <span class="muted">({{ c.lat }}, {{ c.lon }})</span></li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>Пока нет городов. Зайдите в админку и добавьте хотя бы один.</p>
+  {% endif %}
+{% endblock %}

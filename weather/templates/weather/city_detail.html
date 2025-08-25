@@ -1,0 +1,34 @@
+{% extends "weather/base.html" %}
+{% block title %}{{ city.name }} — Погода{% endblock %}
+{% block content %}
+  <h2>{{ city.name }}</h2>
+  <p class="muted">Координаты: {{ city.lat }}, {{ city.lon }}</p>
+
+  {% if snaps %}
+    <table>
+      <thead>
+        <tr>
+          <th>Время</th>
+          <th>Темп., °C</th>
+          <th>Влажн., %</th>
+          <th>Ветер, м/с</th>
+          <th>Описание</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for s in snaps %}
+          <tr>
+            <td>{{ s.ts }}</td>
+            <td>{{ s.temp }}</td>
+            <td>{{ s.humidity }}</td>
+            <td>{{ s.wind }}</td>
+            <td>{{ s.description }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p>Пока нет данных. Выполните сбор:</p>
+    <pre>python manage.py fetch_weather --city "{{ city.name }}"</pre>
+  {% endif %}
+{% endblock %}

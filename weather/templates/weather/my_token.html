@@ -1,0 +1,8 @@
+{% extends "weather/base.html" %}
+{% block title %}Мой токен — Привязка Telegram{% endblock %}
+{% block content %}
+  <h2>Привязка Telegram</h2>
+  <p>Отправьте боту в Telegram команду:</p>
+  <pre>/link {{ token }}</pre>
+  <p class="muted">Токен истечёт: {{ expires_at }}</p>
+{% endblock %}
