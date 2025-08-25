@@ -31,4 +31,3 @@ A **Django + Celery + Telegram Bot** project for monitoring weather in different
 
 ---
 
-## 📂 Project Structure
